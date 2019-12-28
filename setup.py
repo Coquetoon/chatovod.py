@@ -10,7 +10,8 @@ from setuptools import find_packages, setup
 with open("README.rst") as readme_file:
     readme = readme_file.read()
 
-requirements = []
+with open("requirements.txt") as f:
+    requirements = f.readlines()
 
 setup_requirements = ["pytest-runner"]
 
