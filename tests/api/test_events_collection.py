@@ -1,6 +1,6 @@
-from chatovod.api.event_adapter import EventNotRegisteredError, EventsCollection
-
 import pytest
+
+from chatovod.api.event_adapter import EventNotRegisteredError, EventsCollection
 
 
 class BlankEvent:

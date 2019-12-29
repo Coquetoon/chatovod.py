@@ -1,10 +1,10 @@
+import pytest
+
 from chatovod.api.event_adapter import (
     API_EVENT_TYPE_ATTRIBUTE,
     EventAdapter,
     EventsCollection,
 )
-
-import pytest
 
 
 @pytest.fixture

@@ -1,6 +1,6 @@
-from chatovod.utils.parsers import patch_ban_info
-
 import pytest
+
+from chatovod.utils.parsers import patch_ban_info
 
 
 @pytest.fixture

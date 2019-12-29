@@ -7,7 +7,6 @@ from chatovod.structures.room import Room
 
 from .errors import ChatovodConnectionError, ConnectionReset
 
-
 log = logging.getLogger(__name__)
 
 

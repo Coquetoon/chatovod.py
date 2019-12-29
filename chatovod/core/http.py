@@ -3,15 +3,14 @@ import json
 import logging
 
 import aiohttp
-
-from chatovod import __version__
-from chatovod.api.endpoints import APIEndpoint as Endpoints
-from chatovod.api.endpoints import AccountEndpoint, Route
-
 from yarl import URL
 
-from .errors import InvalidLogin, error_factory
+from chatovod import __version__
+from chatovod.api.endpoints import AccountEndpoint
+from chatovod.api.endpoints import APIEndpoint as Endpoints
+from chatovod.api.endpoints import Route
 
+from .errors import InvalidLogin, error_factory
 
 logger = logging.getLogger(__name__)
 
@@ -74,7 +73,10 @@ class HTTPClient:
 
         self._remove_none_params_and_data(kwargs)
 
-        kwargs["headers"] = {"User-Agent": self.user_agent}
+        kwargs["headers"] = {
+            "User-Agent": self.user_agent,
+        }
+
         if headers:
             kwargs["headers"].update(headers)
 
@@ -119,7 +121,9 @@ class HTTPClient:
     def fetch_info(self, limit=20):
         route = Route(path=Endpoints.CHAT_INFO_FETCH, url=self.url)
 
-        params = {"limit": limit}
+        params = {
+            "limit": limit,
+        }
 
         return self.request(route, params=params)
 
@@ -163,7 +167,11 @@ class HTTPClient:
     def moderate(self, nickname=None, message=None, room_id=None):
         route = Route(path=Endpoints.CHAT_NICKNAME_MODERATE, url=self.url)
 
-        params = {"message": message, "nick": nickname, "roomId": room_id}
+        params = {
+            "message": message,
+            "nick": nickname,
+            "roomId": room_id,
+        }
 
         return self.request(route, params=params)
 
@@ -189,28 +197,44 @@ class HTTPClient:
     def open_room_private(self, nickname, limit=20):
         route = Route(path=Endpoints.ROOM_PRIVATE_OPEN, url=self.url)
 
-        params = {"nick": nickname, "limit": limit, "wid": self.window_id}
+        params = {
+            "nick": nickname,
+            "limit": limit,
+            "wid": self.window_id,
+        }
 
         return self.request(route, params=params)
 
     def close_room(self, room_id):
         route = Route(path=Endpoints.ROOM_CLOSE, url=self.url)
 
-        params = {"roomId": room_id, "wid": self.window_id}
+        params = {
+            "roomId": room_id,
+            "wid": self.window_id,
+        }
 
         return self.request(route, params=params)
 
     def send_message(self, content, room_id, to=None):
         route = Route(path=Endpoints.ROOM_MESSAGE_SEND, url=self.url)
 
-        data = {"csrf": self.csrf_token, "msg": content, "roomId": room_id, "to": to}
+        data = {
+            "csrf": self.csrf_token,
+            "msg": content,
+            "roomId": room_id,
+            "to": to,
+        }
 
         return self.request(route, data=data)
 
     def read_messages(self, room_id, from_time, to_time):
         route = Route(path=Endpoints.ROOM_MESSAGES_READ, url=self.url)
 
-        params = {"channelId": room_id, "fromTime": from_time, "toTime": to_time}
+        params = {
+            "channelId": room_id,
+            "fromTime": from_time,
+            "toTime": to_time,
+        }
 
         return self.request(route, params=params)
 
@@ -249,21 +273,29 @@ class HTTPClient:
     def leave_chat(self):
         route = Route(path=Endpoints.USER_CHAT_LEAVE, url=self.url)
 
-        params = {"wid": self.window_id, "csrf": self.csrf_token}
+        params = {
+            "wid": self.window_id,
+            "csrf": self.csrf_token,
+        }
 
         return self.request(route, params=params)
 
     def set_user_age(self, age, limit=20):
         route = Route(path=Endpoints.USER_AGE_SET, url=self.url)
 
-        data = {"age": age, "limit": limit}
+        data = {
+            "age": age,
+            "limit": limit,
+        }
 
         return self.request(route, data=data)
 
     def set_user_status(self, status):
         route = Route(path=Endpoints.USER_STATUS_SET, url=self.url)
 
-        data = {"status": status}
+        data = {
+            "status": status,
+        }
 
         return self.request(route, data=data)
 

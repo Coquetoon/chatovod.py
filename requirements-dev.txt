@@ -1,0 +1,17 @@
+# Coding style
+black==19.10b0
+isort==4.3.21
+
+# Linter
+flake8==3.7.9
+flake8-isort==2.8.0
+flake8-broken-line==0.1.1
+flake8-builtins==1.4.2
+flake8-functions==0.0.2
+pydocstyle==5.0.1
+
+# Run hooks
+pre-commit
+
+# Automation
+tox

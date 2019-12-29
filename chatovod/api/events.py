@@ -1,6 +1,5 @@
 from .event_adapter import EventsCollection
 
-
 APIEvents = EventsCollection()
 
 

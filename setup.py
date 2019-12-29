@@ -2,20 +2,41 @@
 
 """The setup script."""
 
-from chatovod import __version__
+import os
 
 from setuptools import find_packages, setup
 
+__version__ = None
 
-with open("README.rst") as readme_file:
-    readme = readme_file.read()
+install_requires = []
 
-with open("requirements.txt") as f:
-    requirements = f.readlines()
 
-setup_requirements = ["pytest-runner"]
+def open_local(paths, mode="r", encoding="utf8"):
+    path = os.path.join(os.path.abspath(os.path.dirname(__file__)), *paths)
 
-test_requirements = ["pytest>=3"]
+    return open(file=path, mode=mode, encoding=encoding)
+
+
+with open_local(["chatovod", "__version__.py"]) as f:
+    exec(f.read())
+
+with open_local(["README.rst"]) as f:
+    long_description = f.read()
+
+with open_local(["requirements.txt"]) as f:
+    install_requires = f.readlines()
+
+with open_local(["requirements-dev.txt"]) as f:
+    dev_require = f.readlines()
+
+with open_local(["requirements-test.txt"]) as f:
+    tests_require = f.readlines()
+
+
+extras_require = {
+    "dev": dev_require + tests_require,
+    "test": tests_require,
+}
 
 setup(
     author="Henrique Torres",
@@ -32,16 +53,15 @@ setup(
         "Programming Language :: Python :: 3.8",
     ],
     description="Chatovod Python library for bot lovers.",
-    install_requires=requirements,
+    install_requires=install_requires,
+    extras_require=extras_require,
     license="Apache Software License 2.0",
-    long_description=readme,
+    long_description=long_description,
     include_package_data=True,
     keywords="chatovod.py",
     name="chatovod.py",
-    packages=find_packages(include=["chatovod.py", "chatovod.py.*"]),
-    setup_requires=setup_requirements,
+    packages=find_packages(include=["chatovod"]),
     test_suite="tests",
-    tests_require=test_requirements,
     url="https://github.com/Henriquetf/chatovod.py",
     version=__version__,
     zip_safe=False,

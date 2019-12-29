@@ -4,7 +4,6 @@ import re
 
 from bs4 import BeautifulSoup, SoupStrainer
 
-
 # Makes BeautifulSoup parse only ban entry elements
 only_ban_entries = SoupStrainer("label")
 
