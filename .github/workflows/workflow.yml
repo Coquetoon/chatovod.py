@@ -49,7 +49,6 @@ jobs:
 
       - name: Generate coverage report
         run: |
-          poetry shell
           poetry run pytest --cov=chatovod --cov-report=xml
 
       - name: Upload coverage to Codecov
