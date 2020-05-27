@@ -26,7 +26,6 @@ jobs:
       run: tox
 
   Coverage:
-    needs: build
     runs-on: ubuntu-latest
     
     steps:
