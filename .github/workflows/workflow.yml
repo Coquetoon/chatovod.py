@@ -3,7 +3,7 @@ name: Create and test application
 on: [push]
 
 jobs:
-  Linting:
+  linting:
     runs-on: ubuntu-latest
 
     steps:
@@ -14,12 +14,15 @@ jobs:
         with:
           python-version: 3.8
 
-      - name: Linting
+      - name: Install dependencies
         run: |
           pip install pre-commit
+
+      - name: Linting
+        run: |
           pre-commit run --all-files
 
-  Tests:
+  tests:
     runs-on: ubuntu-latest
     strategy:
       max-parallel: 4
@@ -41,8 +44,8 @@ jobs:
       - name: Test with tox
         run: tox
 
-  Coverage:
-    needs: Tests
+  coverage:
+    needs: tests
     runs-on: ubuntu-latest
 
     steps:
@@ -68,4 +71,5 @@ jobs:
           file: ./coverage.xml
           flags: unittests
           name: codecov-umbrella
+          yml: ./codecov.yml
           fail_ci_if_error: true
