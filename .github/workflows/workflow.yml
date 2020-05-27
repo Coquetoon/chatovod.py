@@ -44,12 +44,12 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install pytest pytest-cov
           poetry install --no-dev -vvv
+          pip install pytest pytest-cov
 
       - name: Generate coverage report
         run: |
-          pytest --cov=chatovod --cov-report=xml
+          poetry run pytest --cov=chatovod --cov-report=xml
 
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v1
