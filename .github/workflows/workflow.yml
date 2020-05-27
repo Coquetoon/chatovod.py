@@ -39,7 +39,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install tox tox-gh-actions
+          pip install tox tox-gh-actions poetry
 
       - name: Test with tox
         run: tox
