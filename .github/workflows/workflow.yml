@@ -58,8 +58,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install poetry
-          poetry install --no-dev -vvv
-          poetry install pytest pytest-cov
+          poetry install -vvv
 
       - name: Generate coverage report
         run: |
