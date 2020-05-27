@@ -23,6 +23,7 @@ jobs:
           pip install tox tox-gh-actions
 
       - name: Configure poetry
+        shell: bash
         run: poetry config virtualenvs.in-project true
 
       - name: Test with tox
@@ -45,9 +46,11 @@ jobs:
           pip install poetry
 
       - name: Configure poetry
+        shell: bash
         run: poetry config virtualenvs.in-project true
 
       - name: Install dependencies
+        shell: bash
         run: poetry install
 
       - name: Generate coverage report
