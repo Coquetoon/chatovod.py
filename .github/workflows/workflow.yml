@@ -22,47 +22,5 @@ jobs:
         run: |
           pip install tox tox-gh-actions
 
-      - name: Configure poetry
-        shell: bash
-        run: poetry config virtualenvs.in-project true
-
       - name: Test with tox
         run: tox
-
-  Coverage:
-    needs: Tests
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@master
-
-      - name: Setup Python
-        uses: actions/setup-python@master
-        with:
-          python-version: 3.8
-
-      - name: Install poetry
-        run: |
-          pip install poetry
-
-      - name: Configure poetry
-        shell: bash
-        run: poetry config virtualenvs.in-project true
-
-      - name: Install dependencies
-        shell: bash
-        run: poetry install
-
-      - name: Generate coverage report
-        run: |
-          poetry run pytest --cov=./ --cov-report=xml
-
-      - name: Upload coverage to Codecov
-        uses: codecov/codecov-action@v1
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          file: ./coverage.xml
-          flags: unittests
-          name: codecov-umbrella
-          yml: ./codecov.yml
-          fail_ci_if_error: true
